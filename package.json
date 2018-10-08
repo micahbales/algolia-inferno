@@ -1,0 +1,11 @@
+{
+  "name": "algolia-inferno",
+  "version": "1.0.0",
+  "description": "A little experiment with Inferno and the Algolia API",
+  "main": "index.js",
+  "scripts": {
+    "install-all": "cd api && npm install"
+  },
+  "author": "Micah Bales",
+  "license": "+CAL - SEE LICENSE FILE"
+}
