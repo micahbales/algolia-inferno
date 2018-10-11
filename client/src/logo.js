@@ -1,6 +1,6 @@
 export default ({ width, height }) => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100">
+    <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height}>
       <g fill="none" fill-rule="evenodd">
         <path fill="#182359" d="M.50253 50L50 .50253 99.49747 50 50 99.49747z"/>
         <path fill="#9EDE5B" d="M58.48528 85.35534l1.4142 1.4142L96.66906 50 61.3137 14.64466l-1.4142 1.4142L93.8406 50"/>

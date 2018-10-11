@@ -1,26 +1,31 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 80px;
-}
-
-.App-header {
+.app-header {
   background-color: #f8f8f8;
-  height: 210px;
+  height: 140px;
   padding: 20px;
   color: #3d464d;
 }
 
-.App-intro {
-  font-size: large;
-}
-
-code {
-  color: #e73a37;
-}
-
 li {
   list-style: none;
+}
+
+.search-box {
+  height: 40px;
+  margin-left: 25px;
+}
+
+.search-item {
+  padding: 1%;
+  margin: 5%;
+  border: 1px gray solid;
+}
+
+.item-image {
+  display: block;
+  margin: auto;
+  width: 90%;
+}
+
+.item-title, .item-rank {
+  text-align: center;
 }
