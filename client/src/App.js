@@ -37,6 +37,7 @@ class App extends Component {
     };
 
     this.handleOrderButtonClick = this.handleOrderButtonClick.bind(this);
+    this.handleDeleteClick = this.handleDeleteClick.bind(this);
   }
 
   handleSearchInput(e) {
@@ -63,6 +64,19 @@ class App extends Component {
     this.setState(state);
   }
 
+  handleDeleteClick(e) {
+    const id = e.currentTarget.parentElement.id;
+    // Send delete request to API
+    fetch(`/api/1/apps/${id}`, {
+      method: 'delete'
+    }).then((res) => {
+      // Update client state
+      let state = Object.assign({}, this.state);
+      state.hits = this.state.hits.filter((app) => app._id !== id);
+      this.setState(state);
+    });
+  }
+
   render() {
     return (
       <div className="app">
@@ -78,6 +92,7 @@ class App extends Component {
               content={this.state.content}
               hits={this.state.hits}
               handleFacetClick={this.handleFacetClick}
+              handleDeleteClick={this.handleDeleteClick}
             />
             <button className="order-button" onClick={this.handleOrderButtonClick}>
                 Results Order: {this.state.orderButton.text}
@@ -88,10 +103,8 @@ class App extends Component {
             {
               this.state.hits ? this.state.hits.map((app) => (
                   <SearchItem 
-                    name={app.name}
-                    image={app.image}
-                    link={app.link}
-                    rank={app.rank}
+                    app={app}
+                    handleDeleteClick={this.handleDeleteClick}
                   />
                 )
               ) : ''

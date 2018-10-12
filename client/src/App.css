@@ -62,6 +62,7 @@ li {
   margin: 2% 5%;
   border: 1px #566DFB solid;
   width: 100%;
+  position: relative;
 }
 
 .search-item h5 {
@@ -106,6 +107,14 @@ li {
 
 .order-button:focus {
   outline: 0;
+}
+
+.fa-trash-alt {
+  color: #dc3545;
+  cursor: pointer;
+  position: absolute;
+  bottom: 3%;
+  right: 3%;
 }
 
 @media(min-width:576px) {
