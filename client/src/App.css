@@ -1,8 +1,24 @@
+@import url('https://fonts.googleapis.com/css?family=Hind|Poppins');
+
+.app {
+  font-family: 'Hind', Arial, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', Arial, sans-serif;
+}
+
 .app-header {
-  background-color: #f8f8f8;
-  height: 140px;
+  background-color: #566DFB;
+  height: 80px;
   padding: 20px;
   color: #3d464d;
+}
+
+.app-body {
+  display: flex;
+  flex-direction: column;
+  padding-top: 15px;
 }
 
 li {
@@ -11,21 +27,88 @@ li {
 
 .search-box {
   height: 40px;
-  margin-left: 25px;
+  width: 100%;
+  display: block;
+  margin: 0 auto;
+}
+
+.facet-list {
+  min-width: 185px;
+}
+
+.facet-list ul {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0% 10%;
+}
+
+.facet-item {
+  width: 50%;
+}
+
+.facet-item input {
+  margin-right: 5px;
+}
+
+.items-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .search-item {
+  border-radius: 1%;
   padding: 1%;
-  margin: 5%;
-  border: 1px gray solid;
+  margin: 2% 5%;
+  border: 1px #566DFB solid;
+  width: 100%;
+}
+
+.search-item h5 {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 300px;
+  display: block;
+  margin: 0 auto;
+  margin-top: 5px;
+}
+
+.search-item a {
+  text-decoration: none;
 }
 
 .item-image {
   display: block;
   margin: auto;
-  width: 90%;
+  width: 100%;
 }
 
 .item-title, .item-rank {
   text-align: center;
+}
+
+@media(min-width:576px) {
+  .app-body {
+    flex-direction: row;
+  }
+
+  .facet-list ul {
+    flex-direction: row;
+    flex-wrap: no-wrap;
+  }
+
+  .facet-item {
+    width: 100%;
+  }
+
+  .search-box {
+    height: 40px;
+    width: 75%;
+  }
+
+  .search-item {
+    margin: 1% 0%;
+    width: 49%;
+  }
 }

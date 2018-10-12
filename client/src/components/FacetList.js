@@ -7,7 +7,7 @@ export default function FacetList(props) {
         {
           facets.map((facet) => {
             return (
-              <li>
+              <li className="facet-item">
                 <input type="checkbox" id={`fl-${facet.name}`} 
                     value={facet.name} onChange={props.handleFacetClick} 
                     checked={facets.length < 2} />

@@ -1,12 +1,11 @@
 import {Component} from 'inferno';
 import './registerServiceWorker';
-import Logo from './logo';
 import './App.css';
 import {initDevTools} from 'inferno-devtools';
 import algoliasearch from 'algoliasearch';
 import algoliasearchHelper from 'algoliasearch-helper';
-import FacetList from './FacetList';
-import SearchItem from './SearchItem';
+import FacetList from './components/FacetList';
+import SearchItem from './components/SearchItem';
 var client = algoliasearch('72IDPMKWKA', 'bbedffb18bcdaf7ea43a1db0bcbc7868');
 var helper = algoliasearchHelper(client, 'apps', {
   facets: ['category']
@@ -47,15 +46,15 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="app">
         <header className="app-header">
-        <Logo width="100" height="100" />
           <input type="text" autocomplete="off" id="search-box" 
-              placeholder="Search for apps" onKeyUp={this.handleSearchInput} className="search-box" />
+              placeholder="Search for apps" onKeyUp={this.handleSearchInput} 
+              className="search-box" />
         </header>
-        <div className="row">
+        <div className="app-body">
           
-          <div className="facet-list col-12 col-sm-4">
+          <div className="facet-list">
             <FacetList 
               content={this.state.content}
               hits={this.state.hits}
@@ -63,17 +62,15 @@ class App extends Component {
             />
           </div>
 
-          <div className="col-12 col-sm-8 items-container">
+          <div className="items-container">
             {
               this.state.hits ? this.state.hits.map((app) => (
-                  <div className="col-4">
-                    <SearchItem 
-                      name={app.name}
-                      image={app.image}
-                      link={app.link}
-                      rank={app.rank}
-                    />
-                  </div>
+                  <SearchItem 
+                    name={app.name}
+                    image={app.image}
+                    link={app.link}
+                    rank={app.rank}
+                  />
                 )
               ) : ''
             }

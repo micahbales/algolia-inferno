@@ -1,13 +1,12 @@
 export default function SearchItem(props) {
     return (
       <div className="search-item">
-        <img src="https://picsum.photos/300/150" className="item-image" alt={props.name} />
+        <img src={"https://picsum.photos/300/150"} className="item-image" alt={props.name} />
         <a href={props.link}>
-          <h4 className="item-title">{props.name}</h4>
+          <h5 className="item-title">{props.name}</h5>
         </a>
         <div className="item-rank">
-          <label>Rank: </label>
-          <p>#{props.rank}</p>
+          <label>Rank: #{props.rank}</label>
         </div>
       </div>
     );
