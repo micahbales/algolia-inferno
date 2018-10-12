@@ -75,6 +75,7 @@ li {
 }
 
 .search-item a {
+  color: #566DFB;
   text-decoration: none;
 }
 
@@ -86,6 +87,25 @@ li {
 
 .item-title, .item-rank {
   text-align: center;
+}
+
+.order-button {
+  color: #566DFB; 
+  background: transparent; 
+  border: 2px solid #566DFB;
+  border-radius: 6px; 
+  display: block;
+  margin: 0 auto;
+  width: 80%;
+}
+
+.order-button:hover {
+  background-color: #566DFB;
+  color: white;
+}
+
+.order-button:focus {
+  outline: 0;
 }
 
 @media(min-width:576px) {

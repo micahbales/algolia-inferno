@@ -29,8 +29,14 @@ class App extends Component {
     super(props);
     this.state = {
       content: {},
-      hits: []
+      hits: [],
+      orderButton: {
+        text: 'ASC',
+        status: 'desc'
+      }
     };
+
+    this.handleOrderButtonClick = this.handleOrderButtonClick.bind(this);
   }
 
   handleSearchInput(e) {
@@ -42,6 +48,19 @@ class App extends Component {
     const facetValue = e.currentTarget.value;
     helper.toggleFacetRefinement('category', facetValue)
         .search();
+  }
+
+  handleOrderButtonClick() {
+    let state = Object.assign({}, this.state);
+    if (state.orderButton.status === 'desc') {
+      state.orderButton.status = 'asc';
+      state.orderButton.text = 'DESC';
+    } else {
+      state.orderButton.status = 'desc';
+      state.orderButton.text = 'ASC';
+    }
+    state.hits.reverse();
+    this.setState(state);
   }
 
   render() {
@@ -60,6 +79,9 @@ class App extends Component {
               hits={this.state.hits}
               handleFacetClick={this.handleFacetClick}
             />
+            <button className="order-button" onClick={this.handleOrderButtonClick}>
+                Results Order: {this.state.orderButton.text}
+            </button>
           </div>
 
           <div className="items-container">
