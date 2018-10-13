@@ -1,6 +1,6 @@
 export default function SearchItem(props) {
   return (
-    <div className="search-item" id={props.app._id}>
+    <div className="search-item" id={props.app.objectID} category={props.app.category}>
       <img src={"https://picsum.photos/300/150"} className="item-image" alt={props.app.name} />
       <a href={props.app.link}>
         <h5 className="item-title">{props.app.name}</h5>

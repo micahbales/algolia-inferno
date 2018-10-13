@@ -48,7 +48,7 @@ describe('Endpoints', function() {
                     .end((err, res) => {
                         chai.assert(res.body._id);
                         newAppId = res.body._id;
-
+                        
                         // Check to make sure the record has really been created
                         supertest(app)
                             .get('/api/1/apps')

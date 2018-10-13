@@ -16,16 +16,27 @@ module.exports.getApp = async (req, res) => {
 
 // POST /api/1/apps
 module.exports.postApp = async (req, res) => {
+    // Add new app to database
     const newApp = await App.create(req.body);
-
+    // Update algolia index
+    await algoliaApps.addObject(newApp);
+    
     res.status(200).json({_id: newApp._id});
 };
 
 // DELETE /api/1/apps/:id
 module.exports.deleteApp = async (req, res) => {
-    // Delete record from database
-    await App.deleteOne({_id: req.params.id});
-    // Remove app from algolia index
-    await algoliaApps.deleteObject(req.params.id, (res) => null);
-    res.status(200).json({});
+    const objectID = req.params.id;
+
+    algoliaApps.getObject(objectID, async (err, content) => {
+        if (err) console.error(err);
+        
+        // Delete record from algolia index
+        await algoliaApps.deleteObject(objectID, (res) => null);
+
+        // Delete record from database
+        await App.deleteOne({_id: content._id});
+
+        res.status(200).json({});
+    });
 };
