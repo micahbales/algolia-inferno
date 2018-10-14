@@ -21,7 +21,7 @@ To install all dependencies, run:
 npm run install-all
 ```
 
-## Setting up API config:
+## Setting up API config
 
 In the `api` directory:
 
@@ -31,12 +31,26 @@ cp .env.example .env
 
 Open `.env` and replace the example secrets with your real project secrets.
 
-# Loading Database Data
+# Loading Database Data and Syncing Algolia App Index
 
-In the `api` directory:
+We want to have our database populated with the sample data, and to have that data mirrored in the Algolia App index.
+
+In the `api` directory, run:
+
+```
+npm run data
+```
+
+These actions can be performed separately:
+
+## Seeding the Database
 
 ```
 npm run seed
 ```
 
-Run this any time you need to load or reset the data in the database.
+## Syncing Algolia App Index with Database
+
+```
+npm run sync
+```

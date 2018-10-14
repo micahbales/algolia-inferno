@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
+    "data": "npm run seed && npm run sync",
     "seed": "node ./data/loadData --delete && node ./data/loadData",
+    "sync": "node ./data/syncAlgolia",
     "test": "npm run seed && mocha tests/**/*.js"
   },
   "author": "Micah Bales",
