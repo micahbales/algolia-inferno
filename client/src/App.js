@@ -1,5 +1,4 @@
 import {Component} from 'inferno';
-import './registerServiceWorker';
 import './App.css';
 import {initDevTools} from 'inferno-devtools';
 import algoliasearch from 'algoliasearch';

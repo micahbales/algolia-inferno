@@ -66,6 +66,7 @@ li {
   border-radius: 1%;
   padding: 1%;
   margin: 2% 5%;
+  max-width: 450px;
   border: 1px #566DFB solid;
   width: 100%;
   position: relative;

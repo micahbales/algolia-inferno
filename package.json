@@ -3,9 +3,32 @@
   "version": "1.0.0",
   "description": "A little experiment with Inferno and the Algolia API",
   "main": "index.js",
+  "engines": {
+    "node": "10.0.0"
+  },
   "scripts": {
-    "install-all": "cd api && npm install && cd ../client && npm install && cd .."
+    "start": "nodemon index.js",
+    "data": "npm run seed && npm run sync",
+    "install-all": "npm install && cd client && npm install && cd ..",
+    "seed": "node ./data/loadData --delete && node ./data/loadData",
+    "sync": "node ./data/syncAlgolia",
+    "test": "npm run data && mocha tests/**/*.js",
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "author": "Micah Bales",
-  "license": "+CAL - SEE LICENSE FILE"
+  "license": "+CAL - SEE LICENSE FILE",
+  "dependencies": {
+    "algoliasearch": "^3.30.0",
+    "body-parser": "^1.18.3",
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "lodash": "^4.17.11",
+    "mongoose": "^5.3.1",
+    "nodemon": "^1.18.4"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
+    "supertest": "^3.3.0"
+  }
 }

@@ -54,3 +54,13 @@ npm run seed
 ```
 npm run sync
 ```
+
+# Run the Project Locally
+
+After following the above steps, run the project locally by running `npm start` - first in the root directory, and then in a separate terminal window in the `client` directory.
+
+# Deployment
+
+This project is currently deployed to Heroku. You can see a live demo at:
+
+https://algolia-inferno.herokuapp.com/
