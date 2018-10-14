@@ -7,6 +7,7 @@ import algoliasearchHelper from 'algoliasearch-helper';
 import FacetList from './components/FacetList';
 import SearchItem from './components/SearchItem';
 import CreateAppModal from './components/CreateAppModal';
+import DeleteAppModal from './components/DeleteAppModal';
 var client = algoliasearch('72IDPMKWKA', 'bbedffb18bcdaf7ea43a1db0bcbc7868');
 var helper = algoliasearchHelper(client, 'apps', {
   facets: ['category']
@@ -29,6 +30,10 @@ class App extends Component {
     super(props);
     this.state = {
       content: {},
+      deleteState: {
+        category: '',
+        objectID: ''
+      },
       orderButton: {
         text: 'ASC',
         status: 'desc'
@@ -36,8 +41,10 @@ class App extends Component {
     };
 
     this.handleOrderButtonClick = this.handleOrderButtonClick.bind(this);
-    this.handleDeleteClick = this.handleDeleteClick.bind(this);
+    this.handleDeleteClick = this.handleDeleteAppClick.bind(this);
     this.handleCreateAppClick = this.handleCreateAppClick.bind(this);
+    this.handleDeleteAppModalOpen = this.handleDeleteAppModalOpen.bind(this);
+    this.handleDeleteAppClick = this.handleDeleteAppClick.bind(this);
   }
 
   handleSearchInput(e) {
@@ -72,7 +79,6 @@ class App extends Component {
         category: document.querySelector('.create-app-modal #category').value,
         rank: Number(document.querySelector('.create-app-modal #rank').value)
     }
-
     fetch(`/api/1/apps`, {
         method: 'post',
         headers: {"Content-Type": "application/json; charset=utf-8"},
@@ -91,14 +97,13 @@ class App extends Component {
           categoryFacet.data[postBody.category] = 1;
         }
         this.setState(state);
-        this.handleModalClose();
+        this.handleAddAppModalClose();
       });
 }
 
-  handleDeleteClick(e) {
-    const objectID = e.currentTarget.parentElement.id;
-    const category = e.currentTarget.parentElement.getAttribute('category');
-    console.log(category);
+  handleDeleteAppClick() {
+    const objectID = this.state.deleteState.objectID;
+    const category = this.state.deleteState.category;
     // Send delete request to API
     fetch(`/api/1/apps/${objectID}`, {
       method: 'delete'
@@ -119,22 +124,37 @@ class App extends Component {
       state.content.hits = this.state.content.hits
           .filter((app) => app.objectID !== objectID);
       this.setState(state);
+      this.handleDeleteAppModalClose();
     });
   }
 
-  handleModalOpen() {
+  handleAddAppModalOpen() {
     document.querySelector('.modal.create-app-modal')
         .classList.remove('hidden');
   }
 
-  handleModalClose() {
+  handleAddAppModalClose() {
     document.querySelector('.modal.create-app-modal')
         .classList.add('hidden');
     document.querySelectorAll('.create-app-modal input')
         .forEach((input) => {
           input.value = null;
         });
-  } 
+  }
+
+  handleDeleteAppModalOpen(e) {
+    const state = Object.assign({}, this.state);
+    state.deleteState.objectID = e.currentTarget.parentElement.id;
+    state.deleteState.category = e.currentTarget.parentElement.getAttribute('category');
+    this.setState(state);
+    document.querySelector('.modal.delete-app-modal')
+    .classList.remove('hidden');
+  }
+
+  handleDeleteAppModalClose() {
+    document.querySelector('.modal.delete-app-modal')
+    .classList.add('hidden');
+  }
 
   render() {
     return (
@@ -145,21 +165,25 @@ class App extends Component {
               className="search-box" />
         </header>
         <div className="app-body">
+          <DeleteAppModal 
+            handleDeleteAppClick={this.handleDeleteAppClick}
+            handleModalClose={this.handleDeleteAppModalClose}
+          />
           <CreateAppModal 
             handleCreateAppClick={this.handleCreateAppClick}
-            handleModalClose={this.handleModalClose}
+            handleModalClose={this.handleAddAppModalClose}
           />
           <div className="facet-list">
             <FacetList 
               content={this.state.content}
               hits={this.state.content.hits}
               handleFacetClick={this.handleFacetClick}
-              handleDeleteClick={this.handleDeleteClick}
+              handleDeleteClick={this.handleDeleteAppClick}
             />
             <button className="order-button" onClick={this.handleOrderButtonClick}>
                 Results Order: {this.state.orderButton.text}
             </button>
-            <button className="button open-modal-button" onClick={this.handleModalOpen}>
+            <button className="button open-modal-button" onClick={this.handleAddAppModalOpen}>
                 Add New App
             </button>
           </div>
@@ -169,7 +193,7 @@ class App extends Component {
               this.state.content.hits ? this.state.content.hits.map((app) => (
                   <SearchItem 
                     app={app}
-                    handleDeleteClick={this.handleDeleteClick}
+                    handleDeleteClick={this.handleDeleteAppModalOpen}
                   />
                 )
               ) : ''

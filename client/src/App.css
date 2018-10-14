@@ -123,7 +123,7 @@ button:focus {
   margin-top: 7px;
 }
 
-.add-app-button {
+.add-app-button, .delete-app-button {
   font-size: 14px;
   height: 25px;
   margin-top: 15px;
@@ -157,8 +157,15 @@ button:focus {
   padding: 20px;
   border: 1px solid #888;
   width: 50%;
-  height: 420px;
   text-align: center;
+}
+
+.create-app-modal .modal-content {
+  height: 390px;
+}
+
+.delete-app-modal .modal-content {
+  height: 160px;
 }
 
 .modal .modal-content .input-row input {

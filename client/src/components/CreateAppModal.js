@@ -28,7 +28,7 @@ export default function CreateAppModal(props) {
                             placeholder="App Rank" className="modal-input" />
                 </div>
 
-                <button className="add-app-button" onClick={props.handleCreateAppClick}>
+                <button className="button add-app-button" onClick={props.handleCreateAppClick}>
                     CREATE!
                 </button>
             </div>
