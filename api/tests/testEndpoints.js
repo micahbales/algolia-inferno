@@ -1,5 +1,18 @@
 require('dotenv').config({path: __dirname + '/../.env'});
 
+const algoliasearch = require('algoliasearch');
+const algoliaClient = algoliasearch(
+    process.env.ALGOLIA_APP_ID, 
+    process.env.ALGOLIA_ADMIN_KEY
+);
+const algoliaApps = algoliaClient.initIndex('apps');
+var browser = algoliaApps.browseAll();
+var algoliaAppRecords = [];
+
+browser.on('result', function onResult(content) {
+  algoliaAppRecords = algoliaAppRecords.concat(content.hits);
+});
+
 // Connect to our database
 const mongoose = require('mongoose');
 mongoose.connect(process.env.DATABASE);
@@ -68,26 +81,21 @@ describe('Endpoints', function() {
     describe('DELETE /api/1/apps/:id', () => {
         it('should delete a app by id', (done) => {
             let appToBeDeleted;
-            // Get id of record to be deleted
+            // Get objectID of record to be deleted
+            appToBeDeleted = algoliaAppRecords.find((app) => app.name === 'iBooks');
+            // Delete record
             supertest(app)
-                    .get('/api/1/apps/')
+                    .delete(`/api/1/apps/${appToBeDeleted.objectID}`)
                     .expect(200)
-                    .end((err, res) => {
-                        appToBeDeleted = res.body.apps.find((app) => app.name === 'iBooks');
-                        // Delete record
+                    .end((err, res) => {                                    
+                        // Ensure record deleted
                         supertest(app)
-                                .delete(`/api/1/apps/${appToBeDeleted._id}`)
+                                .get('/api/1/apps/')
                                 .expect(200)
-                                .end((err, res) => {                                    
-                                    // Ensure record deleted
-                                    supertest(app)
-                                            .get('/api/1/apps/')
-                                            .expect(200)
-                                            .end((err, res) => {
-                                                const deletedapp = res.body.apps.find((app) => app._id === appToBeDeleted._id);
-                                                chai.assert(!deletedapp);
-                                                done(err);
-                                    });
+                                .end((err, res) => {
+                                    const deletedapp = res.body.apps.find((app) => app._id === appToBeDeleted._id);
+                                    chai.assert(!deletedapp);
+                                    done(err);
                         });
             });
         });

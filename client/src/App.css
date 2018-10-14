@@ -14,7 +14,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .app-header {
   background-color: #566DFB;
-  height: 80px;
+  height: 60px;
   padding: 20px;
   color: #3d464d;
 }
@@ -38,7 +38,7 @@ li {
 }
 
 .facet-list {
-  min-width: 185px;
+  min-width: 215px;
 }
 
 .facet-list ul {
@@ -59,6 +59,7 @@ li {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  width: 100%;
 }
 
 .search-item {
@@ -192,6 +193,7 @@ button:focus {
   .facet-list ul {
     flex-direction: row;
     flex-wrap: no-wrap;
+    max-width: 215px;
   }
 
   .facet-item {

@@ -8,7 +8,7 @@
     "data": "npm run seed && npm run sync",
     "seed": "node ./data/loadData --delete && node ./data/loadData",
     "sync": "node ./data/syncAlgolia",
-    "test": "npm run seed && mocha tests/**/*.js"
+    "test": "npm run data && mocha tests/**/*.js"
   },
   "author": "Micah Bales",
   "license": "+CAL - SEE LICENSE FILE",
