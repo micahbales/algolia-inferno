@@ -47,11 +47,16 @@ li {
   padding: 0% 10%;
 }
 
+.facet-list h3 {
+  padding-left: 11%;
+}
+
 .facet-item {
   width: 50%;
 }
 
 .facet-item input {
+  cursor: pointer;
   margin-right: 5px;
 }
 
@@ -67,7 +72,7 @@ li {
   padding: 1%;
   margin: 2% 5%;
   max-width: 450px;
-  border: 1px #566DFB solid;
+  border: 1px grey solid;
   width: 100%;
   position: relative;
 }
@@ -132,6 +137,17 @@ button:focus {
   width: 35%
 }
 
+.delete-app-button {
+  border: 2px solid #dc3545;
+  color: #dc3545;
+  width: 45%
+}
+
+.delete-app-button:hover {
+  background-color: #dc3545;
+  color: white;
+}
+
 .fa-trash-alt {
   color: #dc3545;
   cursor: pointer;
@@ -167,7 +183,7 @@ button:focus {
 }
 
 .delete-app-modal .modal-content {
-  height: 160px;
+  height: 300px;
 }
 
 .modal .modal-content .input-row input {
@@ -191,10 +207,24 @@ button:focus {
     flex-direction: row;
   }
 
+  .delete-app-button {
+    max-width: 200px;
+    width: 35%
+  }
+
+  .delete-app-modal .modal-content {
+    height: 160px;
+    width: 80%;
+  }
+
   .facet-list ul {
     flex-direction: row;
     flex-wrap: no-wrap;
     max-width: 215px;
+  }
+
+  .facet-list h3 {
+    padding-left: 25px;
   }
 
   .facet-item {
@@ -202,6 +232,7 @@ button:focus {
   }
 
   .search-box {
+    padding-left: 15px;
     height: 40px;
     width: 75%;
   }

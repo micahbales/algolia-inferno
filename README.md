@@ -11,7 +11,6 @@ The goal of this app is to:
 ## Requirements
 
 * Node.js 10
-* MongoDB 4
 
 ## Installing Dependencies & Setting Up Databases
 
@@ -21,9 +20,7 @@ To install all dependencies, run:
 npm run install-all
 ```
 
-## Setting up API config
-
-In the `api` directory:
+## Setting up configuration
 
 ```
 cp .env.example .env
@@ -35,7 +32,6 @@ Open `.env` and replace the example secrets with your real project secrets.
 
 We want to have our database populated with the sample data, and to have that data mirrored in the Algolia App index.
 
-In the `api` directory, run:
 
 ```
 npm run data
@@ -57,7 +53,7 @@ npm run sync
 
 # Run the Project Locally
 
-After following the above steps, run the project locally by running `npm start` - first in the root directory, and then in a separate terminal window in the `client` directory.
+After following the above steps, run the project locally by running `npm start` twice - first in the root directory, and then in a separate terminal window in the `client` directory.
 
 # Deployment
 

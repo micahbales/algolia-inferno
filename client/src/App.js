@@ -34,8 +34,8 @@ class App extends Component {
         objectID: ''
       },
       orderButton: {
-        text: 'ASC',
-        status: 'desc'
+        status: 'desc',
+        text: 'Lowest Rank'
       }
     };
 
@@ -61,10 +61,10 @@ class App extends Component {
     let state = Object.assign({}, this.state);
     if (state.orderButton.status === 'desc') {
       state.orderButton.status = 'asc';
-      state.orderButton.text = 'DESC';
+      state.orderButton.text = 'Highest Rank';
     } else {
       state.orderButton.status = 'desc';
-      state.orderButton.text = 'ASC';
+      state.orderButton.text = 'Lowest Rank';
     }
     state.content.hits.reverse();
     this.setState(state);
@@ -119,10 +119,17 @@ class App extends Component {
             .search();
         delete categoryFacet.data[category];
       }
+      // Clear checked category
+      if (state.content.hits.length < 2) {
+        document.querySelectorAll('li.facet-item input').forEach((elem) => {
+            elem.setAttribute('checked', '');
+        });
+      }
       // Update hits
       state.content.hits = this.state.content.hits
           .filter((app) => app.objectID !== objectID);
       this.setState(state);
+      client.clearCache();
       this.handleDeleteAppModalClose();
     });
   }
@@ -174,13 +181,14 @@ class App extends Component {
           />
           <div className="facet-list">
             <FacetList 
+              facetName="Categories"
               content={this.state.content}
               hits={this.state.content.hits}
               handleFacetClick={this.handleFacetClick}
               handleDeleteClick={this.handleDeleteAppClick}
             />
             <button className="order-button" onClick={this.handleOrderButtonClick}>
-                Results Order: {this.state.orderButton.text}
+                Sort from {this.state.orderButton.text}
             </button>
             <button className="button open-modal-button" onClick={this.handleAddAppModalOpen}>
                 Add New App

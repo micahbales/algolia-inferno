@@ -2,7 +2,8 @@ export default function FacetList(props) {
   if (!props.hits || !props.content.getFacetValues) return '';
   const facets = props.content.getFacetValues('category');
   return (
-    <div>
+    <div className="facet-list">
+      <h3>{props.facetName}</h3>
       <ul>
         {
           facets.map((facet) => {
